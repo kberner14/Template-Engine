@@ -9,6 +9,165 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const employees = [];
+
+class Start {
+
+    managerPrompt() {
+        return inquirer
+            .prompt([
+                {
+                    type: "input",
+                    message: "What is the manager's name?",
+                    name: "managerName"
+                },
+                {
+                    type: "input",
+                    message: "What is your ID?",
+                    name: "managerId"
+                },
+                {
+                    type: "input",
+                    message: "What is your email?",
+                    name: "managerEmail"
+                },
+                {
+                    type: "input",
+                    message: "What is your Office Number?",
+                    name: "officeNumber"
+                },
+                {
+                    type: "list",
+                    name: "otherRoles",
+                    message: "What type of team member would you like to add?",
+                    choices: [
+                        "Intern",
+                        "Engineer",
+                        "I am done adding team members"
+                    ]
+                }
+            ])
+            .then(answer => {
+                const manager = new Manager(answer.managerName, answer.managerId, answer.managerEmail, answer.officeNumber)
+                employees.push(manager)
+                console.log(employees);
+
+                if (answer.otherRoles === "Intern") {
+                    this.internPrompt();
+                } else if (answer.otherRoles === "Engineer") {
+                    this.engineerPrompt();
+                }
+            })
+                .catch(err => {
+                    console.log("error")
+                });
+
+    }
+    internPrompt() {
+        return inquirer
+            .prompt([
+                {
+                    type: "input",
+                    message: "What is the intern's name?",
+                    name: "internName"
+                },
+                {
+                    type: "input",
+                    message: "What is your ID?",
+                    name: "internId"
+                },
+                {
+                    type: "input",
+                    message: "What is your email?",
+                    name: "internEmail"
+                },
+                {
+                    type: "input",
+                    message: "What is your School?",
+                    name: "internSchool"
+                },
+                {
+                    type: "list",
+                    name: "otherRoles",
+                    message: "What type of team member would you like to add?",
+                    choices: [
+                        "Intern",
+                        "Engineer",
+                        "I am done adding team members"
+                    ]
+                }
+            ])
+            .then(answer => {
+                const intern = new Intern(answer.internName, answer.internId, answer.internEmail, answer.internSchool)
+                employees.push(intern)
+                console.log(employees);
+
+                if (answer.otherRoles === "Intern") {
+                    this.internPrompt();
+                } else if (answer.otherRoles === "Engineer") {
+                    this.engineerPrompt();
+                }
+            })
+                .catch(err => {
+                    console.log("error")
+                });
+    }
+    engineerPrompt() {
+        return inquirer
+            .prompt([
+                {
+                    type: "input",
+                    message: "What is the engineer's name?",
+                    name: "engineerName"
+                },
+                {
+                    type: "input",
+                    message: "What is the engineer's ID?",
+                    name: "engineerId"
+                },
+                {
+                    type: "input",
+                    message: "What is the engineer's email?",
+                    name: "engineerEmail"
+                },
+                {
+                    type: "input",
+                    message: "What is the engineer's GitHub URL?",
+                    name: "engineerGithub"
+                },
+                {
+                    type: "list",
+                    name: "otherRoles",
+                    message: "What type of team member would you like to add?",
+                    choices: [
+                        "Intern",
+                        "Engineer",
+                        "I am done adding team members"
+                    ]
+                }
+            ])
+            .then(answer => {
+                const engineer = new Engineer(answer.engineerName, answer.engineerId, answer.engineerEmail, answer.engineerGithub)
+                employees.push(engineer)
+                console.log(employees);
+
+                if (answer.otherRoles === "Intern") {
+                    internPrompt();
+                } else if (answer.otherRoles === "Engineer") {
+                    engineerPrompt();
+                }
+            })
+                .catch(err => {
+                    console.log("error")
+                });
+        }
+    }
+
+    const generator = new Start
+    generator.managerPrompt()
+
+
+
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -32,4 +191,4 @@ const render = require("./lib/htmlRenderer");
 // and Intern classes should all extend from a class named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
+// for the provided `render` function to work!
