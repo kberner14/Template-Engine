@@ -8,6 +8,7 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+
 const render = require("./lib/htmlRenderer");
 const employees = [];
 
@@ -56,13 +57,11 @@ class Start {
                     this.internPrompt();
                 } else if (answer.otherRoles === "Engineer") {
                     this.engineerPrompt();
-                } else if (answer.otherRoles === "Manager") {
-                    this.managerPrompt();
-                } else return (render(employees))
+                }
             })
-                .catch(err => {
-                    console.log("error")
-                });
+            .catch(err => {
+                console.log("error")
+            });
 
     }
     internPrompt() {
@@ -108,13 +107,11 @@ class Start {
                     this.internPrompt();
                 } else if (answer.otherRoles === "Engineer") {
                     this.engineerPrompt();
-                } else if (answer.otherRoles === "Manager") {
-                    this.managerPrompt();
-                } else return (render(employees))
+                }
             })
-                .catch(err => {
-                    console.log("error")
-                });
+            .catch(err => {
+                console.log("error")
+            });
     }
     engineerPrompt() {
         return inquirer
@@ -148,7 +145,7 @@ class Start {
                         "Engineer",
                         "I am done adding team members"
                     ]
-                } 
+                }
             ])
             .then(answer => {
                 const engineer = new Engineer(answer.engineerName, answer.engineerId, answer.engineerEmail, answer.engineerGithub)
@@ -159,20 +156,20 @@ class Start {
                     this.internPrompt();
                 } else if (answer.otherRoles === "Engineer") {
                     this.engineerPrompt();
-                } else if (answer.otherRoles === "Manager") {
-                    this.managerPrompt();
-                } else return (render(employees))
+                }
             })
-                .catch(err => {
-                    console.log("error")
-                });
-            }
-       
-        
+            .catch(err => {
+                console.log("error")
+            });
     }
 
-    const generator = new Start
-    generator.managerPrompt()
+
+}
+
+const generator = new Start
+generator.managerPrompt()
+
+
 
 
 
