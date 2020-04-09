@@ -56,7 +56,9 @@ class Start {
                     this.internPrompt();
                 } else if (answer.otherRoles === "Engineer") {
                     this.engineerPrompt();
-                }
+                } else if (answer.otherRoles === "Manager") {
+                    this.managerPrompt();
+                } else return (render(employees))
             })
                 .catch(err => {
                     console.log("error")
@@ -106,7 +108,9 @@ class Start {
                     this.internPrompt();
                 } else if (answer.otherRoles === "Engineer") {
                     this.engineerPrompt();
-                }
+                } else if (answer.otherRoles === "Manager") {
+                    this.managerPrompt();
+                } else return (render(employees))
             })
                 .catch(err => {
                     console.log("error")
@@ -144,7 +148,7 @@ class Start {
                         "Engineer",
                         "I am done adding team members"
                     ]
-                }
+                } 
             ])
             .then(answer => {
                 const engineer = new Engineer(answer.engineerName, answer.engineerId, answer.engineerEmail, answer.engineerGithub)
@@ -152,15 +156,19 @@ class Start {
                 console.log(employees);
 
                 if (answer.otherRoles === "Intern") {
-                    internPrompt();
+                    this.internPrompt();
                 } else if (answer.otherRoles === "Engineer") {
-                    engineerPrompt();
-                }
+                    this.engineerPrompt();
+                } else if (answer.otherRoles === "Manager") {
+                    this.managerPrompt();
+                } else return (render(employees))
             })
                 .catch(err => {
                     console.log("error")
                 });
-        }
+            }
+       
+        
     }
 
     const generator = new Start
