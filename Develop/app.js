@@ -57,7 +57,10 @@ class Start {
                     this.internPrompt();
                 } else if (answer.otherRoles === "Engineer") {
                     this.engineerPrompt();
-                }
+                } else fs.writeFile(outputPath, render(employees), function(err) {
+                    if (err) throw err;
+                    console.log("succes")
+                })
             })
             .catch(err => {
                 console.log("error")
@@ -107,7 +110,10 @@ class Start {
                     this.internPrompt();
                 } else if (answer.otherRoles === "Engineer") {
                     this.engineerPrompt();
-                }
+                } else fs.writeFile(outputPath, render(employees), function(err) {
+                    if (err) throw err;
+                    console.log("succes")
+                })
             })
             .catch(err => {
                 console.log("error")
@@ -156,12 +162,16 @@ class Start {
                     this.internPrompt();
                 } else if (answer.otherRoles === "Engineer") {
                     this.engineerPrompt();
-                }
+                } else fs.writeFile(outputPath, render(employees), function(err) {
+                    if (err) throw err;
+                    console.log("succes")
+                })
             })
             .catch(err => {
                 console.log("error")
             });
     }
+    
 
 
 }
